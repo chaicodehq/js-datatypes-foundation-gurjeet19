@@ -53,14 +53,37 @@
  */
 export function writePostcard(sender, receiver, message) {
   // Your code here
+  if (
+    typeof sender !== "string" ||
+    typeof receiver !== "string" ||
+    typeof message !== "string" ||
+    sender.trim() === "" ||
+    receiver.trim() === "" ||
+    message.trim() === ""
+  ) {
+    return "";
+  }
+  return `Priy ${receiver},\n\n${message}\n\nAapka/Aapki,\n${sender}`;
 }
 
 export function isValidPincode(code) {
   // Your code here
+  if (typeof code !== "string") {
+    return false;
+  }
+  if (code.length !== 6) {
+    return false;
+  }
+  if (code.startsWith("0")) {
+    return false;
+  }
+  if (!/^\d+$/.test(code)) return false;
+  return true;
 }
 
 export function formatPostcardField(label, value, width) {
   // Your code here
+  
 }
 
 export function isFromState(address, stateCode) {

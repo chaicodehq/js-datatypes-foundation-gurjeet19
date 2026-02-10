@@ -47,6 +47,21 @@
  */
 export function createPaanOrder(basePaan, customizations) {
   // Your code here
+  if (
+    typeof basePaan !== "object" ||
+    basePaan === null ||
+    Array.isArray(basePaan)
+  ) {
+    return {};
+  }
+  if (
+    typeof customizations !== "object" ||
+    customizations === null ||
+    Array.isArray(customizations)
+  ) {
+    return Object.assign({}, basePaan);
+  }
+  return Object.assign({}, basePaan, customizations);
 }
 
 export function freezeMenu(menu) {
