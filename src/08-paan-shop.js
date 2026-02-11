@@ -66,12 +66,45 @@ export function createPaanOrder(basePaan, customizations) {
 
 export function freezeMenu(menu) {
   // Your code here
+  if (typeof menu !== "object" || menu === null || Array.isArray(menu)) {
+    return {};
+  }
+  Object.freeze(menu);
+  return menu;
 }
 
 export function updatePrices(menu, increase) {
   // Your code here
+  if (
+    typeof menu !== "object" ||
+    menu === null ||
+    Array.isArray(menu) ||
+    typeof increase !== "number"
+  ) {
+    return {};
+  }
+  let entries = Object.entries(menu);
+  let updateEntries = entries.map(([key, value]) => {
+    return [key, value + increase];
+  });
+  return Object.fromEntries(updateEntries);
 }
 
 export function mergeDailySpecials(regularMenu, specialsMenu) {
   // Your code here
+  if (
+    typeof regularMenu !== "object" ||
+    regularMenu === null ||
+    Array.isArray(regularMenu)
+  ) {
+    regularMenu = {};
+  }
+  if (
+    typeof specialsMenu !== "object" ||
+    specialsMenu === null ||
+    Array.isArray(specialsMenu)
+  ) {
+    specialsMenu = {};
+  }
+  return { ...regularMenu, ...specialsMenu };
 }

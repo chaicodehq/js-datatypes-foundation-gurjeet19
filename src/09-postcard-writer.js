@@ -77,19 +77,40 @@ export function isValidPincode(code) {
   if (code.startsWith("0")) {
     return false;
   }
-  if (!/^\d+$/.test(code)) return false;
+  if (!/^\d+$/.test(code)) {
+    return false;
+  }
   return true;
 }
 
 export function formatPostcardField(label, value, width) {
   // Your code here
-  
+  if (typeof label !== "string" || typeof value !== "string") {
+    return "";
+  }
+  let finalWidth = typeof width === "number" ? width : 12;
+  let paddedLabel = label.padEnd(finalWidth);
+  return `${paddedLabel}: ${value}`;
 }
 
 export function isFromState(address, stateCode) {
   // Your code here
+  if (typeof address !== "string" || typeof stateCode !== "string") {
+    return false;
+  }
+  return address.endsWith(stateCode);
 }
 
 export function countVowels(message) {
   // Your code here
+  if (typeof message !== "string") {
+    return 0;
+  }
+  let count = 0;
+  count = message.match(/[aeiouAEIOU]/g);
+  if (count === null) {
+    return 0;
+  } else {
+    return count.length;
+  }
 }
